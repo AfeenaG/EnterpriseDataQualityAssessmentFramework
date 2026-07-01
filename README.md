@@ -1,29 +1,37 @@
 # Enterprise Data Quality Assessment Framework
 
-> A reusable framework for assessing, profiling, prioritizing, and improving data quality across enterprise datasets.
+> A reusable framework for profiling, assessing, prioritizing, and improving enterprise data quality using SQL, Python, and modern data governance principles.
 
 ---
 
 ## Overview
 
-This repository documents my structured approach for performing enterprise data quality assessments.
+This repository documents my structured approach to performing enterprise data quality assessments.
 
-The framework combines SQL profiling, business analysis, root cause analysis, and data governance principles to identify data quality issues, assess business impact, prioritize remediation activities, and recommend long-term preventive controls.
+The framework combines data profiling, business analysis, root cause analysis, and data governance to identify data quality issues, assess business impact, prioritize remediation efforts, and recommend long-term preventive controls.
 
-Although this methodology can be applied to any structured dataset, it is particularly suited for operational systems, regulatory reporting, government datasets, and enterprise data warehouses.
+Although the examples throughout this repository are illustrative, the methodology can be applied across operational databases, data warehouses, analytics platforms, regulatory reporting systems, and enterprise applications.
+
+---
+
+> **Disclaimer**
+
+This repository demonstrates a reusable enterprise data quality assessment framework developed for professional and educational purposes.
+
+All examples, SQL templates, visualizations, and metrics are illustrative and are intended to demonstrate methodology only. They do not represent any production, proprietary, confidential, or client-specific datasets.
 
 ---
 
 # Objectives
 
-The objectives of a data quality assessment are to:
+The objective of a data quality assessment is to:
 
 - Assess the overall health of a dataset
 - Identify data quality issues using recognized quality dimensions
 - Quantify the impact of each issue
-- Determine the root cause
+- Determine the underlying root cause
 - Prioritize remediation based on business risk
-- Recommend corrective and preventive actions
+- Recommend corrective and preventive controls
 - Strengthen enterprise data governance
 
 ---
@@ -34,16 +42,19 @@ The objectives of a data quality assessment are to:
 Understand Business Context
             │
             ▼
-Review Data Dictionary
+Review Metadata & Business Rules
             │
             ▼
-Profile the Data
+Profile the Dataset
             │
             ▼
 Identify Data Quality Issues
             │
             ▼
-Quantify Business Impact
+Quantify Findings
+            │
+            ▼
+Assess Business Impact
             │
             ▼
 Root Cause Analysis
@@ -58,7 +69,7 @@ Recommend Corrective Actions
 Implement Preventive Controls
             │
             ▼
-Validate the Solution
+Validate Implementation
             │
             ▼
 Continuous Data Governance
@@ -68,66 +79,66 @@ Continuous Data Governance
 
 # Step 1 – Understand the Business Context
 
-Before performing any technical analysis, understand:
+Before writing SQL or profiling data, understand the business.
 
-- Why does the dataset exist?
-- What business processes does it support?
+Questions to answer include:
+
+- What is the purpose of the dataset?
+- Which business processes depend on it?
 - Who owns the data?
 - Who consumes the data?
-- What decisions are made using this data?
-- What are the downstream systems?
+- What decisions are made using the data?
+- Which downstream systems depend on the data?
 
-Deliverables
+Deliverables:
 
-- Business context
-- Data owners
-- Data stewards
-- Business rules
-- Reporting requirements
+- Business Context
+- Data Owners
+- Data Stewards
+- Business Rules
+- Reporting Requirements
+- Critical Data Elements
 
 ---
 
 # Step 2 – Review Metadata
 
-Review all available metadata.
+Review all available metadata before beginning analysis.
 
-Examples include
+Typical metadata includes:
 
 - Data Dictionary
 - Entity Relationship Diagram (ERD)
-- Reference Tables
 - Data Models
+- Reference Tables
 - Interface Specifications
 - Mapping Documents
 - Business Rules
 
-Objective
-
-Understand the expected structure and behavior of the data before profiling begins.
+The objective is to understand the expected structure and behavior of the data before assessing its quality.
 
 ---
 
 # Step 3 – Profile the Dataset
 
-Profile the data using five recognized data quality dimensions.
+Evaluate the dataset using five recognized data quality dimensions.
 
 ---
 
-## Completeness
+## 1. Completeness
 
-Questions
+**Question**
 
-- Are mandatory fields populated?
-- Are required relationships complete?
+> Is all required information present?
 
-Typical checks
+Typical checks:
 
 - NULL values
 - Blank values
-- Missing foreign keys
 - Missing mandatory attributes
+- Missing foreign keys
 
-Example SQL
+Illustrative SQL
 
 ```sql
 SELECT
@@ -137,20 +148,20 @@ FROM Customer;
 
 ---
 
-## Accuracy
+## 2. Accuracy
 
-Questions
+**Question**
 
-- Does the value correctly represent the real-world object?
+> Does the data correctly represent the real-world entity?
 
-Typical checks
+Typical checks:
 
-- Negative currency values
+- Negative monetary values
 - Impossible dates
-- Incorrect calculations
-- Invalid measurements
+- Invalid calculations
+- Out-of-range numeric values
 
-Example SQL
+Illustrative SQL
 
 ```sql
 SELECT *
@@ -160,20 +171,20 @@ WHERE OrderDate > ShipDate;
 
 ---
 
-## Consistency
+## 3. Consistency
 
-Questions
+**Question**
 
-- Does the data agree across related datasets?
+> Does the data remain consistent across related datasets and business rules?
 
-Typical checks
+Typical checks:
 
-- Reference tables
+- Reference table validation
 - Cross-field validation
 - Parent-child relationships
-- Cross-system comparisons
+- Cross-system reconciliation
 
-Example SQL
+Illustrative SQL
 
 ```sql
 SELECT *
@@ -185,21 +196,21 @@ WHERE s.Status IS NULL;
 
 ---
 
-## Validity
+## 4. Validity
 
-Questions
+**Question**
 
-- Does the data satisfy business rules?
+> Does the data conform to defined business rules?
 
-Typical checks
+Typical checks:
 
 - Enumerated values
-- Email validation
-- Date ranges
+- Email formats
 - Numeric ranges
-- Mandatory formats
+- Date ranges
+- Pattern validation
 
-Example SQL
+Illustrative SQL
 
 ```sql
 SELECT *
@@ -209,19 +220,19 @@ WHERE Email NOT LIKE '%@company.com';
 
 ---
 
-## Uniqueness
+## 5. Uniqueness
 
-Questions
+**Question**
 
-- Should this record exist only once?
+> Should each record exist only once?
 
-Typical checks
+Typical checks:
 
 - Duplicate primary keys
 - Duplicate business keys
 - Duplicate transactions
 
-Example SQL
+Illustrative SQL
 
 ```sql
 SELECT CustomerID,
@@ -235,34 +246,41 @@ HAVING COUNT(*) > 1;
 
 # Step 4 – Quantify Findings
 
-For every issue record:
+Every issue should be quantified.
+
+Typical metrics include:
 
 - Number of affected records
-- Percentage of total dataset
-- Columns affected
-- Business process affected
+- Percentage of dataset affected
+- Columns impacted
+- Business process impacted
 - Severity
 - Frequency
 
-Example
+Illustrative Example
 
-| Dimension | Issue | Records | % |
-|-----------|---------|---------:|----:|
-| Completeness | Missing Units | 15 | 7.5% |
-| Accuracy | Negative Value | 8 | 4.0% |
+| Dimension | Rule | Records | Percentage |
+|------------|----------------------------|--------:|-----------:|
+| Completeness | Mandatory Field Missing | 14 | 7.0% |
+| Accuracy | Invalid Date Sequence | 9 | 4.5% |
+| Consistency | Reference Data Mismatch | 11 | 5.5% |
+| Validity | Invalid Format | 13 | 6.5% |
+| Uniqueness | Duplicate Business Key | 7 | 3.5% |
 
 ---
 
 # Step 5 – Assess Business Impact
 
-Not every issue should receive the same priority.
+Not every issue requires immediate remediation.
 
-Evaluate each issue using:
+Each issue should be evaluated using a risk-based approach.
+
+Consider:
 
 - Business impact
+- Operational impact
 - Financial impact
 - Regulatory impact
-- Operational impact
 - Customer impact
 - Downstream reporting
 - System integration
@@ -271,104 +289,116 @@ Evaluate each issue using:
 Example
 
 | Issue | Business Impact |
-|---------|----------------|
-| Missing Housing Units | High |
-| Duplicate IDs | High |
-| Invalid Email | Low |
+|-------------------------------|---------|
+| Missing Mandatory Attribute | High |
+| Duplicate Business Key | High |
+| Invalid Email Format | Medium |
+| Reference Data Mismatch | Medium |
 
 ---
 
 # Step 6 – Root Cause Analysis
 
-Determine why the issue occurred.
+Correcting data without understanding why the issue occurred often leads to recurring problems.
 
-Common causes include
+Common root causes include:
 
 - Missing application validation
 - Missing database constraints
 - Manual data entry
-- Integration failures
-- Poor user interface
+- Poor user interface design
 - Missing reference data
-- Missing governance controls
+- Integration failures
+- Legacy system limitations
+- Ambiguous business rules
+
+The objective is to implement preventive controls rather than repeatedly correcting the same issues.
 
 ---
 
 # Step 7 – Prioritize Issues
 
-Prioritize based on risk rather than record count.
+Prioritize remediation based on organizational risk—not simply the number of affected records.
 
-Evaluation Criteria
+Evaluation criteria include:
 
-- Business Impact
-- Operational Risk
-- Downstream Use
-- Regulatory Risk
-- Volume
-- Ease of Remediation
+- Business impact
+- Operational risk
+- Regulatory compliance
+- Financial impact
+- Downstream dependencies
+- Volume of affected records
+- Root cause complexity
+- Ease of remediation
 
-Example
+Illustrative Priority Matrix
 
-| Issue | Priority |
-|---------|----------|
-| Missing Business Key | High |
-| Duplicate Primary Key | High |
-| Invalid Email | Low |
+| Priority | Description |
+|-----------|-------------|
+| High | Significant business or regulatory impact requiring immediate action |
+| Medium | Moderate impact with manageable operational risk |
+| Low | Limited impact; remediation can be scheduled |
 
 ---
 
-# Step 8 – Recommend Solutions
+# Step 8 – Recommend Corrective Actions
 
-Separate recommendations into three categories.
+Recommendations should be grouped into three categories.
+
+---
 
 ## Immediate Remediation
 
-Examples
+Examples:
 
 - Correct invalid records
 - Validate against source systems
 - Obtain missing information
+- Update historical records
 
 ---
 
 ## Preventive Controls
 
-Examples
+Examples:
 
 - Application validation
 - Database constraints
-- Reference tables
-- Automated validation
-- ETL quality checks
+- Reference table validation
+- Automated quality checks
+- ETL validation rules
 
 ---
 
 ## Data Governance Improvements
 
-Examples
+Examples:
 
 - Assign Data Steward ownership
-- Define business rules
-- Establish data quality KPIs
-- Implement issue management
-- Periodic data quality assessments
+- Maintain business rules
+- Maintain reference data
+- Monitor Data Quality KPIs
+- Track remediation activities
+- Conduct periodic assessments
+- Establish continuous improvement processes
 
 ---
 
-# Validation
+# Step 9 – Validate the Solution
 
-After remediation
+After implementing corrective actions:
 
 - Re-profile the dataset
-- Verify corrective actions
-- Validate business rules
-- Confirm expected results
+- Verify that issues have been resolved
+- Confirm business rules are enforced
+- Validate expected outcomes with stakeholders
+- Ensure no new issues have been introduced
 
 ---
 
 # Deliverables
 
-A completed assessment should produce:
+A completed assessment typically produces:
 
 - Data Quality Assessment Report
 - SQL Profiling Scripts
@@ -377,24 +407,37 @@ A completed assessment should produce:
 - Prioritization Matrix
 - Remediation Plan
 - Data Governance Recommendations
+- Executive Dashboard
 
 ---
 
 # Technology Stack
 
-Typical tools include
+Typical technologies include:
+
+### Databases
 
 - SQL Server
 - Oracle
 - PostgreSQL
 - MySQL
+
+### Programming
+
 - Python
 - Pandas
+- NumPy
+
+### Analytics & Visualization
+
 - Power BI
 - Excel
-- Azure Data Factory
+
+### Cloud & Modern Data Platforms
+
 - Microsoft Fabric
-- Databricks
+- Azure Data Factory
+- Azure Databricks
 
 ---
 
@@ -403,25 +446,62 @@ Typical tools include
 - Data Profiling
 - Data Quality Assessment
 - Data Governance
-- Root Cause Analysis
 - SQL
 - Python
-- Power BI
+- Root Cause Analysis
 - Business Analysis
-- Data Validation
-- Stakeholder Management
-- Reporting
 - Risk Assessment
+- Data Validation
+- Data Stewardship
+- Stakeholder Communication
+- Reporting & Dashboarding
+
+---
+
+# Repository Structure
+
+```text
+enterprise-data-quality-framework/
+│
+├── README.md
+├── sql/
+│   ├── completeness.sql
+│   ├── accuracy.sql
+│   ├── consistency.sql
+│   ├── validity.sql
+│   └── uniqueness.sql
+│
+├── python/
+│   └── data_profiling.ipynb
+│
+├── powerbi/
+│   └── Data_Quality_Dashboard.pbix
+│
+├── docs/
+│   ├── methodology.md
+│   ├── prioritization-framework.md
+│   └── root-cause-analysis.md
+│
+└── images/
+```
 
 ---
 
 # Future Enhancements
 
-Planned additions include:
+Planned enhancements include:
 
-- Automated data profiling in Python
+- Automated SQL profiling library
+- Metadata-driven rule generation
+- Python data profiling package
 - Great Expectations integration
-- Data quality dashboards in Power BI
-- Reusable SQL library
-- Metadata-driven profiling
-- Data quality scorecards
+- Microsoft Fabric implementation
+- Data Quality Scorecards
+- Automated Power BI dashboards
+- Enterprise Data Quality KPI monitoring
+
+---
+
+# License
+
+This repository is intended for educational and professional portfolio purposes. The framework may be adapted and extended to support enterprise data quality initiatives across different industries and technology platforms.
