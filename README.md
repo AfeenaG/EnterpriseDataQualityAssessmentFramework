@@ -266,7 +266,7 @@ Illustrative Example
 | Validity | Invalid Format | 50 | 75% |
 | Uniqueness | Duplicate Business Key | 6 | 97% |
 
-![Data Quality Profiling Results](/images/DataQualityDimensions.png)
+![Data Quality Profiling Results](images/DataQualityDimensions.png)
 
 ---
 
