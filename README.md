@@ -267,6 +267,8 @@ Illustrative Example
 | Validity | Invalid Format | 13 | 6.5% |
 | Uniqueness | Duplicate Business Key | 7 | 3.5% |
 
+![Data Quality Profiling Results](../images/DataQualityDimensions.png)
+
 ---
 
 # Step 5 – Assess Business Impact
