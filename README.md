@@ -466,17 +466,13 @@ enterprise-data-quality-framework/
 │
 ├── README.md
 ├── sql/
-│   ├── completeness.sql
-│   ├── accuracy.sql
-│   ├── consistency.sql
-│   ├── validity.sql
-│   └── uniqueness.sql
+│   ├──Restricted
 │
 ├── python/
-│   └── data_profiling.ipynb
+│   └── Restricted.ipynb
 │
 ├── powerbi/
-│   └── Data_Quality_Dashboard.pbix
+│   └── Restricted.pbix
 │
 ├── docs/
 │   ├── methodology.md
@@ -485,6 +481,13 @@ enterprise-data-quality-framework/
 │
 └── images/
 ```
+> **Note**
+>
+> SQL scripts, Python notebooks, Power BI reports, and supporting artifacts have been intentionally omitted from this public repository.
+>
+> Many of the techniques demonstrated in this framework were developed while working with enterprise and government-style datasets where the underlying implementations are subject to confidentiality or intellectual property restrictions.
+>
+> This repository focuses on documenting my methodology, analytical approach, and data quality framework rather than distributing implementation code.
 
 ---
 
