@@ -458,36 +458,39 @@ Typical technologies include:
 - Reporting & Dashboarding
 
 ---
-
 # Repository Structure
 
 ```text
 enterprise-data-quality-framework/
 │
 ├── README.md
-├── sql/
-│   ├──Restricted
-│
-├── python/
-│   └── Restricted.ipynb
-│
-├── powerbi/
-│   └── Restricted.pbix
-│
-├── docs/
-│   ├── methodology.md
-│   ├── prioritization-framework.md
-│   └── root-cause-analysis.md
-│
-└── images/
+├── images/
+└── docs/
 ```
-> **Note**
->
-> SQL scripts, Python notebooks, Power BI reports, and supporting artifacts have been intentionally omitted from this public repository.
->
-> Many of the techniques demonstrated in this framework were developed while working with enterprise and government-style datasets where the underlying implementations are subject to confidentiality or intellectual property restrictions.
->
-> This repository focuses on documenting my methodology, analytical approach, and data quality framework rather than distributing implementation code.
+
+---
+
+## Implementation Note
+
+This public repository is intended to demonstrate my enterprise data quality assessment methodology and analytical approach.
+
+Implementation artifacts such as SQL scripts, Python notebooks, Power BI reports, and sample datasets are intentionally not included because they were developed while working with enterprise-style projects or assessment scenarios and may be subject to confidentiality or intellectual property restrictions.
+
+The focus of this repository is to document a reusable framework that demonstrates my approach to:
+
+- Data profiling
+- Data quality assessment
+- Root cause analysis
+- Business impact assessment
+- Risk-based prioritization
+- Data governance
+- Corrective and preventive controls
+
+The methodology presented here can be applied across government, financial services, healthcare, and other enterprise environments.
+
+---
+
+# Future Enhancements
 
 ---
 
