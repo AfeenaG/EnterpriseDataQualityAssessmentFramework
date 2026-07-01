@@ -489,11 +489,6 @@ The focus of this repository is to document a reusable framework that demonstrat
 The methodology presented here can be applied across government, financial services, healthcare, and other enterprise environments.
 
 ---
-
-# Future Enhancements
-
----
-
 # Future Enhancements
 
 Planned enhancements include:
