@@ -228,8 +228,7 @@ WHERE Email NOT LIKE '%@company.com';
 
 Typical checks:
 
-- Duplicate primary keys
-- Duplicate business keys
+- Duplicate primary keys- Duplicate business keys
 - Duplicate transactions
 
 Illustrative SQL
@@ -259,15 +258,15 @@ Typical metrics include:
 
 Illustrative Example
 
-| Dimension | Rule | Records | Percentage |
+| Dimension | Rule | Records | Health % |
 |------------|----------------------------|--------:|-----------:|
-| Completeness | Mandatory Field Missing | 14 | 7.0% |
-| Accuracy | Invalid Date Sequence | 9 | 4.5% |
-| Consistency | Reference Data Mismatch | 11 | 5.5% |
-| Validity | Invalid Format | 13 | 6.5% |
-| Uniqueness | Duplicate Business Key | 7 | 3.5% |
+| Completeness | Mandatory Field Missing |15 | 92.5 | % |
+| Accuracy | Invalid Date Sequence | 21 | 89.5% |
+| Consistency | Reference Data Mismatch | 38 | 81% |
+| Validity | Invalid Format | 50 | 75% |
+| Uniqueness | Duplicate Business Key | 6 | 97% |
 
-![Data Quality Profiling Results](../images/DataQualityDimensions.png)
+![Data Quality Profiling Results](/images/DataQualityDimensions.png)
 
 ---
 
