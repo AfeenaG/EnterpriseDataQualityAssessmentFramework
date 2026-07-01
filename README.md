@@ -260,11 +260,11 @@ Illustrative Example
 
 | Dimension | Rule | Records | Health % |
 |------------|----------------------------|--------:|-----------:|
-| Completeness | Mandatory Field Missing |15 | 92.5 | % |
-| Accuracy | Invalid Date Sequence | 21 | 89.5% |
-| Consistency | Reference Data Mismatch | 38 | 81% |
-| Validity | Invalid Format | 50 | 75% |
-| Uniqueness | Duplicate Business Key | 6 | 97% |
+| Completeness | Mandatory Field Missing |14 | 93 | % |
+| Accuracy | Invalid Date Sequence | 22 | 89% |
+| Consistency | Reference Data Mismatch | 40 | 80% |
+| Validity | Invalid Format | 55 | 72.5% |
+| Uniqueness | Duplicate Business Key | 7 | 96.5% |
 
 ![Data Quality Profiling Results](images/DataQualityDimensions.png)
 
